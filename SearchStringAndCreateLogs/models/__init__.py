@@ -1,6 +1,5 @@
 import usuario
 import carro
-import veiculo
 
 c = carro.Carro("Red", "FLEX", "80v", 5)
 print(c.cor)

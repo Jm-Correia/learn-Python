@@ -1,10 +1,13 @@
-class Veiculo(object):
+import abc
+
+class Veiculo(abc.ABC):
 
     def __init__(self, cor, tipoCombustivel, potencia):
         self.cor = cor
         self.tipoCombustivel = tipoCombustivel
         self.__potencia = potencia
 
+    @abc.abstractmethod
     def changeColor(self, cor):
         self.cor = cor
 

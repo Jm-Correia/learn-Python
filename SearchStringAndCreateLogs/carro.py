@@ -6,4 +6,8 @@ class Carro(veiculo.Veiculo):
 
     def __str__(self):
         return f"Cor:{self.cor}, Qtd de Portas: {self.qtdPortas}, Tipo de Combustivel: {self.tipoCombustivel} , " \
-                   f"Potencia: {self.potencia}"
+               f"Potencia: {self.potencia}"
+
+    def changeColor(self, cor):
+        self.cor = "<< " + cor + " >>"
+
