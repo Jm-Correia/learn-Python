@@ -1,4 +1,5 @@
 import veiculo
+
 class Carro(veiculo.Veiculo):
     def __init__(self,cor, tipoCombustivel, potencia, qtdPortas):
         super().__init__(cor, tipoCombustivel, potencia)

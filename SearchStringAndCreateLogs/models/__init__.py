@@ -9,12 +9,16 @@ print(c.__str__())
 c.potencia = "100v"
 print(c.__str__())
 
+if isinstance(c, usuario.Usuario):
+    print("is a user")
+else:
+    print("Not a user")
 
 list = []
 us = usuario.Usuario("João", 34, "Correia")
 list.append(us)
 
-print(f"olá, {us.nome} {us.sobrenome}, sua idade é {us.idade}")
+print(f"Hi, {us.nome} {us.sobrenome}, your old is {us.idade}")
 
 pot = 5 % 3
 print(pot)
