@@ -1,6 +1,6 @@
 import abc
 
-class interface_Veiculo(abc.ABC):
+class interfaceVeiculo(abc.ABC):
 
     @abc.abstractmethod
     def changeColor(self, cor):

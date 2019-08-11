@@ -1,6 +1,6 @@
 import abc, interface_veiculo
 
-class Veiculo(interface_veiculo.interface_Veiculo, abc.ABC):
+class Veiculo(interface_veiculo.interfaceVeiculo, abc.ABC):
 
     def __init__(self, cor, tipoCombustivel, potencia):
         self.cor = cor
