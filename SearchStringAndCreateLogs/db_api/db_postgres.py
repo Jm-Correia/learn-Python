@@ -1,15 +1,12 @@
 import psycopg2
 
-class db_postgres(object):
+
+class dbPostgres(object):
     def __init__(self):
-        try:
-            self.__connection = psycopg2.connect("dbname='treinaweb_clientes' user='postgres' host='localhost' "
-                                                     "password='12345'")
-        except:
-            self.error = "Not able to connect to the database"
+        self.__connection = psycopg2.connect("dbname='treinaweb_clientes' user='postgres' host='localhost' "
+                                             "password='12345'")
 
     def close(self):
-
         self.__connection.close()
 
     def cursor(self):
@@ -21,11 +18,12 @@ class db_postgres(object):
     def begin(self):
         try:
             status = self.__connection.closed
-            print("STATUS CONNECTION",status)
-            if status:
+            print("STATUS CONNECTION", status)
+            if status == 1:
+                print("Opening Connection")
                 self.__connection = psycopg2.connect("dbname='treinaweb_clientes' user='postgres' host='localhost' "
-                                                 "password='12345'")
-
+                                                     "password='12345'")
+            print("Return Connection opened")
             return self.__connection
         except:
             self.error = "Not able to connect to the database"
