@@ -1,10 +1,10 @@
 import psycopg2
+import db_api.db_fabric
 
 
 class dbPostgres(object):
     def __init__(self):
-        self.__connection = psycopg2.connect("dbname='treinaweb_clientes' user='postgres' host='localhost' "
-                                             "password='12345'")
+        self.__connection = db_api.db_fabric.dbFabric.connection()
 
     def close(self):
         self.__connection.close()
@@ -18,12 +18,11 @@ class dbPostgres(object):
     def begin(self):
         try:
             status = self.__connection.closed
-            print("STATUS CONNECTION", status)
+
             if status == 1:
-                print("Opening Connection")
-                self.__connection = psycopg2.connect("dbname='treinaweb_clientes' user='postgres' host='localhost' "
-                                                     "password='12345'")
-            print("Return Connection opened")
+                self.__connection = db_api.db_fabric.dbFabric.connection()
+
             return self.__connection
         except:
             self.error = "Not able to connect to the database"
+            return self.error
