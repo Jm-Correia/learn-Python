@@ -1,0 +1,59 @@
+<Principal>:
+    orientation: 'vertical'
+    Button:
+        text: "A"
+    Button:
+        text: "B"
+    Button:
+        text: "C"
+    Button:
+        text: "D"
+    Button:
+        text: "E"
+
+<Secundario>:
+    Button:
+        text: "A"
+        size_hint: .1, .1
+        pos_hint: {"x": 0, "y": 1}
+    Button:
+        text: "B"
+        size_hint: .1, .1
+        pos_hint: {"center_x": .5}
+    Button:
+        text: "C"
+        size_hint: .1, .1
+        pos_hint: {"y": 5, "right": 1.}
+
+<Grid>:
+    rows: 1
+    row_default_height: 50
+    row_force_default: True
+    Button:
+        text: "A"
+    Button:
+        text: "B"
+    Button:
+        text: "C"
+    Button:
+        text: "D"
+    Button:
+        text: "E"
+
+<Stack>:
+    orientation: 'lr-bt'
+    Button:
+        text: "A"
+        size_hint: .40, .1
+    Button:
+        text: "B"
+        size_hint: .40, .1
+    Button:
+        text: "C"
+        size_hint: .40, .1
+    Button:
+        text: "D"
+        size_hint: .40, .1
+    Button:
+        text: "E"
+        size_hint: .40, .1
