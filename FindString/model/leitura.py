@@ -33,18 +33,16 @@ class Leitura(object):
 
     def __lista_diretorios(self, path = None):
         if path is not None:
-            #return [d for d in os.listdir(path) if not os.path.isfile(os.path.join(path, d))]
-            return Path(path)
+            return Path(path).iterdir()
         else:
-            #return os.listdir(self.__pasta_principal)
-            return Path(self.__pasta_principal)
+            return Path(self.__pasta_principal).iterdir()
 
     def listar_projetos(self):
-
-
         diretorios = self.__lista_diretorios()
-        retorno = {self.__pasta_principal + "/" + c: self.__lista_diretorios(self.__pasta_principal + "/" + c + "/")
-                   for c in diretorios if c != 'LOG'}
+        retorno = {}
+        for root in diretorios:
+            path = self.__pasta_principal + "/" + root.name
+            retorno[root] = self.__lista_diretorios(path)
 
         self.__escrever_log("-------------------------------------------------------")
         self.__escrever_log("Lendo Diretorios..." + datetime.datetime.now().__str__())
@@ -55,24 +53,17 @@ class Leitura(object):
 
     def convert_date(self, timestamp):
         data = datetime.datetime.utcfromtimestamp(timestamp)
-        data_formatada = data.strftime('%d %M %y')
+        data_formatada = data.strftime('%d-%m-%Y %H:%M:%S')
         return data_formatada
 
 
     def is_mais_atual(self):
         self.__escrever_log("Determinando quais diretorios são os mais atuais.......")
         list_diretorios = self.listar_projetos()
+        for i,r in list_diretorios.items():
+            for second in r:
+                print(second)
 
-        print(list_diretorios)
-
-        # for d in diretorios:
-        #     aux = self.__pasta_principal + '/' + d
-        #     nome = self.__lista_diretorios(aux).pop()
-        #
-        #     t = os.path.getmtime(aux + "/" +nome)
-        #     td = os.path.getmtime(aux)
-        #     print(f" {t}  dos   arquivos: {nome}")
-        #     print(f" {td} dos diretorios: {aux}")
 
 
 if __name__ == '__main__':
