@@ -8,11 +8,18 @@ class Leitura(object):
         self.__diretorio = diretorio
         self.__pasta = pasta
         self.__path_completo = diretorio + "://" + pasta
+        self.pasta_projeto = diretorio + "://" + "z__organizador_ws"
+        Path(self.pasta_projeto).mkdir(exist_ok=True)
+
+    def concat_path(self, path):
+        return self.pasta_projeto + "/" + path
 
     def __criar_log(self):
-        p = Path(self.__path_completo + "/LOG")
+        b = self.concat_path("LOG")
+        print(b)
+        p = Path(b)
         p.mkdir(exist_ok=True)
-        self.__caminho = self.__path_completo + "/LOG/log.txt"
+        self.__caminho = self.concat_path("LOG/log.txt")
 
     def __escrever_log(self, texto):
         if self.__verificarFile():
@@ -21,14 +28,12 @@ class Leitura(object):
             arquivo.close()
         else:
             arquivo = open(self.__caminho, 'w')
-            arquivo.write("#" * 54 )
-            arquivo.write("\n")
+            arquivo.write("#" * 54 + "\n")
             arquivo.write("#" * 20)
             arquivo.write(" Inicio - LOG ")
             arquivo.write("#" * 20)
             arquivo.write("\n")
-            arquivo.write("#" * 54 )
-            arquivo.write("\n")
+            arquivo.write("#" * 54 + "\n")
             arquivo.close()
             self.__escrever_log(texto)
 
@@ -44,7 +49,9 @@ class Leitura(object):
     def create_folder_Eleita(self):
         list = self.__lista_diretorios()
         self.__criar_log()
-        to_path = self.__diretorio + "://z__Eleita"
+        now = datetime.datetime.now()
+        d = now.strftime('%Y%m%d%H%M%S') + "_ELEITA"
+        to_path = self.concat_path(d)
         p = Path(to_path)
         p.mkdir(exist_ok=True)
         winner = []
@@ -65,21 +72,6 @@ class Leitura(object):
                         self.copy_folder(from_path, _to_path)
             self.__escrever_log("-=" * 30)
         return to_path
-
-
-    def listar_projetos(self):
-        diretorios = self.__lista_diretorios()
-        retorno = list()
-        for root in diretorios:
-            path = self.__path_completo + "/" + root.name
-            retorno.append({path: self.__lista_diretorios(path)})
-
-        self.__escrever_log("-=" *30)
-        self.__escrever_log("Lendo Diretorios..." + datetime.datetime.now().__str__())
-        self.__escrever_log(retorno.__str__())
-        self.__escrever_log("-=" *30)
-
-        return retorno
 
     def convert_date(self, timestamp):
         data = datetime.datetime.utcfromtimestamp(timestamp)
