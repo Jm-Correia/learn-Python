@@ -96,13 +96,13 @@ class Leitura(object):
                         #COPIAR A PASTA MAIS
                         # ATUAL SOBREESCREVENDO A ANTIGA NO DIRETORIO TEMP do PROJETO
                         if time_atual > time_aux:
-                            print(time_atual>time_aux)
+                            print("Maior",time_atual>time_aux)
                             break
                         elif time_atual < time_aux:
-                            print(time_atual<time_aux)
+                            print("Menor",time_atual<time_aux)
                             break
                         else:
-                            print(time_atual==time_aux)
+                            print("Igual",time_atual==time_aux)
                             break
 
 
@@ -114,7 +114,10 @@ class Leitura(object):
         p = Path(self.concat_path("temp"))
         p.mkdir(exist_ok=True)
         return p
+    
+
 if __name__ == '__main__':
-    leitura = Leitura("C","Projetos")
+    leitura = Leitura("D","Projetos")
 
     leitura.copy_mais_atual()
+
