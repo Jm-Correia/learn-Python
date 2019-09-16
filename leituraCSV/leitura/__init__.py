@@ -6,7 +6,7 @@ arquivo_texto = open("arquivo_saida.txt", "w")
 with open("SO.CSV") as cvs_file:
     cvs_arquivo = csv.DictReader(cvs_file, delimiter=";")
     count = 0;
-
+    data_aux = date(2018,9,1)
     for row in cvs_arquivo:
 
         if count == 0:
@@ -25,11 +25,11 @@ with open("SO.CSV") as cvs_file:
             if dic.__len__() == 0:
                 continue
             ultimo = OrderedDict(
-                sorted(dic.items(), key=lambda t: date(int(t[1][6:10]), int(t[1][3:5]), int(t[1][:2])))).popitem()
+                sorted(dic.items(), key=lambda t: (date(int(t[1][6:10]), int(t[1][3:5]), int(t[1][:2])))>data_aux)).popitem()
 
+            lista_aux = list(ultimo)
 
-            texto = f"Sistema: {sistema}  computador de" \
-                    f" {ultimo.__str__()} \n"
+            texto = f"Sistema: {sistema} {lista_aux.__str__()} \n"
             arquivo_texto.write(texto)
             print(texto)
 
